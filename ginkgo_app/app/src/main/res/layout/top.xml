@@ -1,0 +1,31 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:id="@+id/toubu"
+    android:layout_height="50dp"
+    android:background="@color/app_color_theme_6"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/left_back_menu"
+        android:src="@mipmap/left_back_white"
+        android:clickable="true"
+        android:layout_marginLeft="0dp"
+        android:padding="15dp"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:text="..."
+        android:id="@+id/menu_text"
+        android:textColor="@color/withe"
+        android:textSize="17dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/group"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+</RelativeLayout>

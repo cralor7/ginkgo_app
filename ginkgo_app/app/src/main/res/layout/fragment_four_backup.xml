@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/withe"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:src="@mipmap/liaotian"
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/litian_text1"
+        android:layout_below="@+id/img"
+        android:text="聊天"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/litian_text2"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp"
+            android:text="快和朋友打个招呼"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/litian_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn"
+            android:layout_centerHorizontal="true"
+            android:background="@color/text_blue"
+            android:text="发起聊天"
+            android:textColor="@color/withe"
+            android:layout_below="@+id/litian_text2"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

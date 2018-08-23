@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0000"
+    android:orientation="vertical"
+    android:id="@+id/search_view"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toubu"
+        android:background="@color/withe"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="订单修改"
+            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/search_cancel"
+            android:src="@mipmap/chahao"
+            android:clickable="true"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/text_white"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dp"
+                android:text="订单号"
+                android:textSize="13sp" />
+            <EditText
+                android:id="@+id/search_ddh"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginTop="11dp"
+                android:paddingLeft="13dp"
+                android:background="@drawable/cehuatbottm_gray"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="请输入订单号"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:visibility="gone"
+                android:layout_marginTop="13dp"
+                android:background="#d3d3d3" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:text="业务模式"
+                android:textSize="13sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/search_ywms"
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:paddingLeft="13dp"
+                android:layout_marginTop="11dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:background="@drawable/cehuatbottm_gray"
+                android:hint="请输入业务模式"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="15dp"
+                android:background="#d3d3d3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:text="经销代码"
+                android:textSize="13sp" />
+            <EditText
+                android:id="@+id/search_jxscode"
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:paddingLeft="13dp"
+                android:layout_marginTop="14dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:background="@drawable/cehuatbottm_gray"
+                android:hint="请输入经销代码"
+                android:textSize="17sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="15dp"
+                android:background="#d3d3d3" />
+
+
+            <Button
+                android:id="@+id/search_submit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="35dp"
+                android:padding="5dp"
+                android:text="检 索"
+                android:background="@color/app_color_theme_6"
+                android:textColor="@color/text_white"
+                android:textSize="16sp" />
+
+
+            <Button
+                android:id="@+id/search_clean"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="清除所有条件"
+                android:layout_marginTop="15dp"
+                android:background="@color/qianhui"
+                android:textColor="@color/wyRed"
+                android:textSize="16sp" />
+
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

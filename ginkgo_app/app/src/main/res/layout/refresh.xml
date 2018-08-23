@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <SearchView
+        android:id="@+id/searchview"
+        android:background="@drawable/serchview_bg"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+
+    </SearchView>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_width="wrap_content"
+        android:id="@+id/avi"
+        android:layout_height="wrap_content"
+
+        app:indicatorName="BallSpinFadeLoaderIndicator"
+        android:layout_gravity="center"
+        app:indicatorColor="#4acbdf"
+        />
+<com.qk.util.RefreshLayout
+
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+
+</com.qk.util.RefreshLayout>
+
+
+</LinearLayout>

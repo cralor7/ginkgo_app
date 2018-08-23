@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qk.activity.QmuiActivity">
+        <com.qmuiteam.qmui.widget.QMUITopBarLayout
+            android:id="@+id/barLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.qmuiteam.qmui.widget.QMUITopBarLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/zhidingdaxiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="指定圆角大小"
+                    app:qmui_radiusBottomRight="8dp"
+                    app:qmui_radiusBottomLeft="8dp"
+                    app:qmui_radiusTopRight="8dp"
+                    app:qmui_radiusTopLeft="8dp"
+                    android:textColor="@color/qmui_s_link_color"
+                    app:qmui_borderColor="@color/qmui_s_link_color"
+                    app:qmui_borderWidth="1px"
+                    app:qmui_isRadiusAdjustBounds="true"
+                    app:qmui_radius="10dp" />
+
+                <com.qmuiteam.qmui.widget.QMUIFloatLayout
+                    android:id="@+id/qmuidemo_floatlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    app:qmui_childHorizontalSpacing="20dp"
+                    app:qmui_childVerticalSpacing="20dp"/>
+
+                <com.qmuiteam.qmui.alpha.QMUIAlphaButton
+                    android:id="@+id/alphabutton"
+                    android:layout_width="106dp"
+                    android:layout_height="wrap_content"
+                    android:text="QMUIAlphaButton" />
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/charulistiview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="插入girdleview"
+                    app:qmui_radiusBottomRight="8dp"
+                    app:qmui_radiusBottomLeft="8dp"
+                    app:qmui_radiusTopRight="8dp"
+                    app:qmui_radiusTopLeft="8dp"
+                    android:textColor="@color/qmui_s_link_color"
+                    app:qmui_borderColor="@color/qmui_s_link_color"
+                    app:qmui_borderWidth="1px"
+                    app:qmui_isRadiusAdjustBounds="true"
+                    app:qmui_radius="10dp" />
+                <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+                    android:layout_width="wrap_content"
+                    android:text="QMUIAlphaTextView"
+                    android:layout_height="wrap_content" />
+
+
+
+
+
+                <com.qmuiteam.qmui.widget.QMUIEmptyView
+                    android:id="@+id/emptyView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="?attr/qmui_topbar_height"
+                    android:background="@color/qmui_config_color_white"
+                    app:qmui_title_text="@string/emptyView_mode_desc_double"
+                    app:qmui_detail_text="@string/emptyView_mode_desc_detail_double"
+                    android:fitsSystemWindows="true"/>
+
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="?attr/qmui_topbar_height"
+                    android:background="@color/qmui_config_color_white"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:fitsSystemWindows="true"/>
+
+                <ListView
+                    android:id="@+id/listview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"></ListView>
+                <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                    android:id="@+id/groupListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="11111"
+                    android:id="@+id/verison"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.qmuiteam.qmui.widget.QMUITopBarLayout
+                    android:id="@+id/topbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"/>
+                <!--QMUILinkTextView    如果是电话邮箱url等会自动变色-->
+                <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
+                    android:text="969563641@qq.com"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+                <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
+                    android:text="18865516792"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+                <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
+                    android:text="www.baidu.com"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+                <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
+                    android:text="fenygyezong"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                            android:id="@+id/add"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:text="删除"
+                            app:qmui_radiusBottomRight="8dp"
+                            app:qmui_radiusBottomLeft="8dp"
+                            app:qmui_radiusTopRight="8dp"
+                            app:qmui_radiusTopLeft="8dp"
+                            android:textColor="@color/qmui_s_link_color"
+                            app:qmui_borderColor="@color/qmui_s_link_color"
+                            app:qmui_borderWidth="1px"
+                            app:qmui_isRadiusAdjustBounds="true"
+                            app:qmui_radius="10dp" />
+                        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                            android:id="@+id/delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:text="添加"
+                            app:qmui_radiusBottomRight="8dp"
+                            app:qmui_radiusBottomLeft="8dp"
+                            app:qmui_radiusTopRight="8dp"
+                            app:qmui_radiusTopLeft="8dp"
+                            android:textColor="@color/qmui_s_link_color"
+                            app:qmui_borderColor="@color/qmui_s_link_color"
+                            app:qmui_borderWidth="1px"
+                            app:qmui_isRadiusAdjustBounds="true"
+                            app:qmui_radius="10dp" />
+
+                    </LinearLayout>
+                    <com.qmuiteam.qmui.widget.QMUIAnimationListView
+                        android:id="@+id/qmlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="500dp">
+                    </com.qmuiteam.qmui.widget.QMUIAnimationListView>
+                </LinearLayout>
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/tiaozhuantab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="跳转tabl"
+                    app:qmui_radiusBottomRight="8dp"
+                    app:qmui_radiusBottomLeft="8dp"
+                    app:qmui_radiusTopRight="8dp"
+                    app:qmui_radiusTopLeft="8dp"
+                    android:textColor="@color/qmui_s_link_color"
+                    app:qmui_borderColor="@color/qmui_s_link_color"
+                    app:qmui_borderWidth="1px"
+                    app:qmui_isRadiusAdjustBounds="true"
+                    app:qmui_radius="10dp" />
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+
+
+    </LinearLayout>
+

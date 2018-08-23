@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toubu"
+        android:background="@color/app_color_theme_6"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/left_back"
+            android:src="@mipmap/left_back_white"
+            android:clickable="true"
+            android:layout_marginLeft="0dp"
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:text="个人信息"
+            android:textColor="@color/text_black"
+            android:textSize="17dp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:id="@+id/search"
+            android:layout_centerInParent="true"
+            android:hint="订单号/业务模型/经销代码   "
+            android:drawableRight="@mipmap/search1"
+            android:background="@drawable/cehuatbottm_white"
+
+            />
+        <LinearLayout
+            android:id="@+id/group"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_width="wrap_content"
+        android:id="@+id/avi"
+        android:layout_height="wrap_content"
+
+        app:indicatorName="BallSpinFadeLoaderIndicator"
+        android:layout_gravity="center"
+        app:indicatorColor="#4acbdf"
+        />
+    <com.qk.util.RefreshLayout
+
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+
+    </com.qk.util.RefreshLayout>
+
+
+</LinearLayout>

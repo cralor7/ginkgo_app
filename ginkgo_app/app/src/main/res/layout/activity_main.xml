@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.qk.activity.MainActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+  <RelativeLayout
+      android:padding="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <TextView
+          android:id="@+id/usernmae_text"
+          android:layout_centerInParent="true"
+          android:text="你好"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+      <ImageView
+          android:id="@+id/main_set_img"
+          android:src="@mipmap/shezhi"
+          android:layout_alignParentRight="true"
+          android:layout_width="25dp"
+          android:layout_marginRight="10dp"
+          android:layout_height="25dp" />
+  </RelativeLayout>
+    <!--第一部分 头像姓名部分-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rel1"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+        <com.qk.util.CircleImageView
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/qingkalogo"
+            android:id="@+id/name_left_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+            <TextView
+                android:id="@+id/company_text"
+                android:layout_below="@+id/name_left_img"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="归属公司:济南重汽"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@+id/company_text"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/office_text"
+            android:text="归属部门:轻卡销售部"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/right_btn"
+                android:id="@+id/user_message_right"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+             android:background="@color/qianhui"
+             >
+
+         </RelativeLayout>
+
+         <!--二级菜单-->
+        <com.qk.view.MyEListView
+             android:layout_marginTop="10dp"
+             android:id="@+id/expandableListView"
+             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.qk.view.MyEListView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
