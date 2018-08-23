@@ -46,7 +46,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
      **/
     private Handler handler;
     private Context ctx;
-    private QMUIEmptyView mEmptyView;
+    private QMUIEmptyView myEmptyView;
     private QMUIGroupListView mGroupListView;
     private String token;
     private String username;
@@ -79,8 +79,8 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
 
     @Override
     public void initView() {
-        mEmptyView = findViewById(R.id.emptyView);
-        mEmptyView.hide();
+        myEmptyView = findViewById(R.id.emptyView);
+        myEmptyView.hide();
         handler = new Handler(Looper.getMainLooper());
         mGroupListView = findViewById(R.id.groupListView);
         token = DataUtils.getLocalData(this, "token", "token");
@@ -125,7 +125,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                             public void onSuccess(Response<String> response) {
                                 scrollView.setVisibility(View.VISIBLE);
                                 tevMenuRight.setVisibility(View.VISIBLE);
-                                mEmptyView.hide();
+                                myEmptyView.hide();
                                 String data = response.body();
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
@@ -155,7 +155,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                     tevMenuRight.setVisibility(View.GONE);
                                     e.printStackTrace();
                                     tipDialog.dismiss();
-                                    mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                                    myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             initData();
@@ -172,7 +172,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                 scrollView.setVisibility(View.GONE);
                                 tevMenuRight.setVisibility(View.GONE);
                                 tipDialog.dismiss();
-                                mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                                myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         initData();
@@ -297,7 +297,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                    tevMenuRight.setVisibility(View.GONE);
                                    e.printStackTrace();
                                    tipDialog.dismiss();
-                                   mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                                   myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                        @Override
                                        public void onClick(View v) {
                                            initData();
@@ -314,7 +314,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                scrollView.setVisibility(View.GONE);
                                tevMenuRight.setVisibility(View.GONE);
                                tipDialog.dismiss();
-                               mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                               myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
                                        initData();
