@@ -56,6 +56,11 @@ public class Constant {
      * 获取个人信息接口
      */
     public static final String USER_MESSAGE = server_url+"user/getUserInfo";
+    /**
+     * 检查更新接口
+     */
+    public static final String GET_VERSION = server_url+"sys/getVersion";
+
 
     /**********************************用户中心提示******************************************/
 
