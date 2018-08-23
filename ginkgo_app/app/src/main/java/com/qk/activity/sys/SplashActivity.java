@@ -7,11 +7,21 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+import com.qk.Constant;
+import com.qk.GApp;
 import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @author fengyezong&cuiweilong
@@ -55,7 +65,7 @@ public class SplashActivity extends Activity {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
-    /*    handler.postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 OkGo.<String>post(Constant.TOKEN_VALID_URL)
@@ -97,7 +107,7 @@ public class SplashActivity extends Activity {
                             }
                         });
             }
-        }, 3);*/
+        }, 3);
 
     }
 }

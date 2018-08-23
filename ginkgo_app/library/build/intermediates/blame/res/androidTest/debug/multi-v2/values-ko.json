@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "E:\\file\\aaa\\ginkgo_app\\ginkgo_app\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ko\\values-ko.xml",
+            "map": [
+                {
+                    "source": "E:\\file\\aaa\\ginkgo_app\\ginkgo_app\\library\\build\\intermediates\\bundles\\debug\\res\\values-ko\\values-ko.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,121,188",
+                        "endColumns": "65,66,68",
+                        "endOffsets": "116,183,252"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "E:\\file\\androidfile\\Test\\Test\\ginkgo_app\\ginkgo_app\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ko\\values-ko.xml",
             "map": [
                 {
