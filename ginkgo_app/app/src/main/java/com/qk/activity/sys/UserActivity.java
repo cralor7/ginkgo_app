@@ -247,7 +247,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
        final QMUITipDialog tipDialog;
        tipDialog = new QMUITipDialog.Builder(ctx)
                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-               .setTipWord("正在提交")
+               .setTipWord("正在修改")
                .create();
        tipDialog.show();
        handler.postDelayed(new Runnable() {
