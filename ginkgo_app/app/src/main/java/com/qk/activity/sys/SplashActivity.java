@@ -69,8 +69,7 @@ public class SplashActivity extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                OkGo.<String>post(Constant.TOKEN_VALID_URL)
-                        //强制使用 multipart/form-data 表单上传（只是演示，不需要的话不要设置。默认就是false）
+                OkGo.<String>post(Constant.GET_VERSION)
                         .tag(1)
                         .headers("Authorization", "Bearer " + token)
                         .execute(new StringCallback() {
@@ -79,6 +78,7 @@ public class SplashActivity extends Activity {
                                 //这个就是返回来的结果
                                 String data = response.body();
                                 String code = "";
+                                String version = "" ;
                                 try {
                                     JSONObject jsonObject=new JSONObject(data);
                                     code = jsonObject.get("code").toString();
@@ -87,10 +87,11 @@ public class SplashActivity extends Activity {
                                 }
                                 Log.v("data",""+code);
                                 if(Constant.TOKEN_VALID_CODE.equals(code)){
-                                    GApp.TOKEN = token;
-                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+//                                    GApp.TOKEN = token;
+//                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+
                                 }else{
                                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                                     startActivity(intent);
