@@ -157,7 +157,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                                 if(Constant.SUCCESS_CODE.equals(code)){
                                     //保存新的密码到本地
                                     DataUtils.updateLocalData(ctx,"password", newPwd);
-                                    Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ctx, "修改成功,请重新登录", Toast.LENGTH_SHORT).show();
                                     finish();
                                     //重新登录
                                     Intent intent2 = new Intent(ctx, LoginActivity.class);
