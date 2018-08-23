@@ -24,7 +24,6 @@ import com.qk.util.DataUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 /**
  * @author fengyezong&cuiweilong
  * @date 2018/8/1
