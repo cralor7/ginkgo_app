@@ -2,11 +2,13 @@ package com.qk.activity.sys;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ import com.qk.util.DataUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.qk.GApp.context;
 
 /**
  * @author fengyezong&cuiweilong
@@ -62,9 +66,7 @@ public class SplashActivity extends Activity {
             finish();
             return;
         }
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -77,20 +79,28 @@ public class SplashActivity extends Activity {
                                 //这个就是返回来的结果
                                 String data = response.body();
                                 String code = "";
-                                String version = "" ;
+                                String version = "";
                                 try {
                                     JSONObject jsonObject=new JSONObject(data);
                                     code = jsonObject.get("code").toString();
+                                    version = jsonObject.get("data").toString();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                                 Log.v("data",""+code);
-                                if(Constant.TOKEN_VALID_CODE.equals(code)){
+                                if(Constant.SUCCESS_CODE.equals(code)){
 //                                    GApp.TOKEN = token;
 //                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 //                                    startActivity(intent);
 //                                    finish();
-
+                                    if(Constant.VERSION.equals(version)){
+                                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }else{
+                                        Log.e("SplashActivity","需要更新版本到---"+version);
+                                        Toast.makeText(ctx, "您需要更新新版本", Toast.LENGTH_SHORT).show();
+                                    }
                                 }else{
                                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                                     startActivity(intent);
@@ -111,4 +121,41 @@ public class SplashActivity extends Activity {
         }, 3);
 
     }
+
+
+    public void getVersion(){
+        //退出的确认弹出框
+        new AlertDialog.Builder(ctx)
+                .setTitle("提示")
+                .setMessage("请更新最新版本")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * 监听Back键按下事件,方法1:
+     * 注意:
+     * super.onBackPressed()会自动调用finish()方法,关闭
+     * 当前Activity.
+     * 若要屏蔽Back键盘,注释该行代码即可
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.e("SplashActivity","按了返回键");
+        Toast.makeText(ctx, "按了返回键", Toast.LENGTH_SHORT).show();
+    }
+
+
 }
