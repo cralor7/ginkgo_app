@@ -54,7 +54,8 @@ public class SplashActivity extends Activity {
 
     /**
      * 打开程序时判断是否已经登陆过，且token有效
-     * ccccccccccccccccccc
+     * ccccccccccc
+     * cccccccc
      */
     private void initView() {
         if("".equals(token)||"value".equals(token)){
