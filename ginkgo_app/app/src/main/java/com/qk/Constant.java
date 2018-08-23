@@ -109,7 +109,7 @@ public class Constant {
     public static final String LOGTAG="CNBLOG";
     /**
      * OKGO连接超时的时间
-     * */
+     */
     public static final long OKGO_CONNECT_TIME = 3000;
     /**
      * token有效code码
@@ -121,16 +121,24 @@ public class Constant {
     public final static String SUCCESS_CODE = "0";
     /**
      * viewpager数量
-     * */
+     */
     public static final int VIEWPAGER_NUM = 5;
     /**
      * 未登录或登录超时常量
-     * */
+     */
     public static  final  String RELOGIN_CODE = "-4";
     /**
      * token过期标志
-     * */
+     */
     public static  final  String TOKEN_OVERTIME = "-3";
+    /**
+     * 手机号码长度
+     */
+    public static  final   int PHONE_LENGTH = 11;
+    /**
+     * 邮箱格式 正则表达式
+     */
+    public static  final   String EMAIL_FORMAT = ".+@.+\\.[a-z]+";
 
     /********************************************* 版本号******************************/
     public static final  String VERSION = "V1.0.0";

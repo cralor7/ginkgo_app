@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -30,6 +31,9 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author fengyezong&cuiweilong
@@ -59,6 +63,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
     private ScrollView scrollView;
     private String oldEmail,oldPhone,oldMobile;
     private Activity activity;
+    private Pattern pattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,12 +199,20 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                     phone.setBackgroundResource(R.drawable.user_edittext_bg);
                     mobile.setBackgroundResource(R.drawable.user_edittext_bg);
                 }else{
-                    //手机号格式不正确
-                    if(EditTextUtils.getString(mobile).length()<11){
+                    //验证手机号格式
+                    if(EditTextUtils.getString(mobile).length() < Constant.PHONE_LENGTH){
                         Toast.makeText(ctx, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                         mobile.setFocusable(true);
                         mobile.setFocusableInTouchMode(true);
                         mobile.requestFocus();
+                        return;
+                    }
+                    //验证邮箱格式
+                    if(!EditTextUtils.getString(email).matches(Constant.EMAIL_FORMAT)){
+                        Toast.makeText(ctx, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                        email.setFocusable(true);
+                        email.setFocusableInTouchMode(true);
+                        email.requestFocus();
                         return;
                     }
                     email.setFocusable(false);
