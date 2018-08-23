@@ -2,11 +2,13 @@ package com.qk.activity.sys;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -30,6 +32,9 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author fengyezong&cuiweilong
  * @date 2018/8/1
@@ -41,7 +46,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
      **/
     private Handler handler;
     private Context ctx;
-    private QMUIEmptyView mEmptyView;
+    private QMUIEmptyView myEmptyView;
     private QMUIGroupListView mGroupListView;
     private String token;
     private String username;
@@ -58,6 +63,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
     private ScrollView scrollView;
     private String oldEmail,oldPhone,oldMobile;
     private Activity activity;
+    private Pattern pattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +79,8 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
 
     @Override
     public void initView() {
-        mEmptyView = findViewById(R.id.emptyView);
-        mEmptyView.hide();
+        myEmptyView = findViewById(R.id.emptyView);
+        myEmptyView.hide();
         handler = new Handler(Looper.getMainLooper());
         mGroupListView = findViewById(R.id.groupListView);
         token = DataUtils.getLocalData(this, "token", "token");
@@ -85,6 +91,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
         no = findViewById(R.id.text24);
         email = findViewById(R.id.text25);
         phone = findViewById(R.id.text26);
+//        phone.setInputType(InputType.TYPE_CLASS_PHONE);
         mobile = findViewById(R.id.text27);
         tevMenuRight = findViewById(R.id.menu_text_right);
         tevMenuRight.setVisibility(View.GONE);
@@ -118,9 +125,8 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                             public void onSuccess(Response<String> response) {
                                 scrollView.setVisibility(View.VISIBLE);
                                 tevMenuRight.setVisibility(View.VISIBLE);
-                                mEmptyView.hide();
+                                myEmptyView.hide();
                                 String data = response.body();
-                                String code = "";
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     Gson gson = new Gson();
@@ -149,7 +155,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                     tevMenuRight.setVisibility(View.GONE);
                                     e.printStackTrace();
                                     tipDialog.dismiss();
-                                    mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                                    myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             initData();
@@ -166,7 +172,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                 scrollView.setVisibility(View.GONE);
                                 tevMenuRight.setVisibility(View.GONE);
                                 tipDialog.dismiss();
-                                mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                                myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         initData();
@@ -193,22 +199,39 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                     phone.setBackgroundResource(R.drawable.user_edittext_bg);
                     mobile.setBackgroundResource(R.drawable.user_edittext_bg);
                 }else{
+                    //验证手机号格式
+                    if(EditTextUtils.getString(mobile).length() < Constant.PHONE_LENGTH){
+                        Toast.makeText(ctx, "手机号格式不正确", Toast.LENGTH_SHORT).show();
+                        mobile.setFocusable(true);
+                        mobile.setFocusableInTouchMode(true);
+                        mobile.requestFocus();
+                        return;
+                    }
+                    //验证邮箱格式
+                    if(!EditTextUtils.getString(email).matches(Constant.EMAIL_FORMAT)){
+                        Toast.makeText(ctx, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                        email.setFocusable(true);
+                        email.setFocusableInTouchMode(true);
+                        email.requestFocus();
+                        return;
+                    }
                     email.setFocusable(false);
                     tevMenuRight.setText("修改");
-                    editTextable(email,false);
-                    editTextable(phone,false);
-                    editTextable(mobile,false);
-                    if(oldEmail.equals(email.getText().toString()) && oldPhone.equals(phone.getText().toString()) && oldMobile.equals(mobile.getText().toString())){
+                    editTextable(email, false);
+                    editTextable(phone, false);
+                    editTextable(mobile, false);
+                    if(oldEmail.equals(EditTextUtils.getString(email)) && oldPhone.equals(EditTextUtils.getString(phone)) && oldMobile.equals(EditTextUtils.getString(mobile))){
                         Toast.makeText(ctx, "您并没有做出修改", Toast.LENGTH_SHORT).show();
                         email.setBackgroundResource(R.drawable.user_edittext_nobg);
                         phone.setBackgroundResource(R.drawable.user_edittext_nobg);
                         mobile.setBackgroundResource(R.drawable.user_edittext_nobg);
                         return;
                     }
-                    saveUser();
-                    oldEmail = email.getText().toString();
-                    oldPhone = phone.getText().toString();
-                    oldMobile = mobile.getText().toString();
+
+                    updateUser();
+                    oldEmail =  EditTextUtils.getString(email);
+                    oldPhone =  EditTextUtils.getString(phone);
+                    oldMobile =  EditTextUtils.getString(mobile);
                 }
                 break;
             case R.id.left_back_menu:
@@ -229,17 +252,21 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
             editText.setClickable(true);
         }
     }
-   public void saveUser(){
+
+    /**
+     * 修改用户个人信息
+     */
+    public void updateUser(){
        final QMUITipDialog tipDialog;
        tipDialog = new QMUITipDialog.Builder(ctx)
                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-               .setTipWord("正在加载")
+               .setTipWord("正在修改")
                .create();
        tipDialog.show();
        handler.postDelayed(new Runnable() {
            @Override
            public void run() {
-               OkGo.<String>post(Constant.USER_MESSAGE)
+               OkGo.<String>post(Constant.USER_MESSAGE_UPDATE)
                        .tag(1)
                        .headers("Authorization","Bearer " + token)
                        .params("email", EditTextUtils.getString(email))
@@ -254,26 +281,28 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                    JSONObject jsonObject = new JSONObject(data);
                                    code = jsonObject.get("code").toString();
 
-                               } catch (JSONException e) {
+                                   //判断是否修改成功 如果code是success code 则成功，否则失败
+                                   if(Constant.SUCCESS_CODE.equals(code)){
+                                       tipDialog.dismiss();
+                                       email.setBackgroundResource(R.drawable.user_edittext_nobg);
+                                       phone.setBackgroundResource(R.drawable.user_edittext_nobg);
+                                       mobile.setBackgroundResource(R.drawable.user_edittext_nobg);
+                                       Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
+
+                                   }else{
+                                   }
+
+                               } catch (Exception e) {
                                    scrollView.setVisibility(View.GONE);
                                    tevMenuRight.setVisibility(View.GONE);
                                    e.printStackTrace();
                                    tipDialog.dismiss();
-                                   mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                                   myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                        @Override
                                        public void onClick(View v) {
                                            initData();
                                        }
                                    });
-                               }
-                               //判断是否修改成功 如果code是successde code则成功，否则失败
-                               if(Constant.SUCCESS_CODE.equals(code)){
-                                   tipDialog.dismiss();
-                                   email.setBackgroundResource(R.drawable.user_edittext_nobg);
-                                   phone.setBackgroundResource(R.drawable.user_edittext_nobg);
-                                   mobile.setBackgroundResource(R.drawable.user_edittext_nobg);
-                                   Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
-                               }else{
                                }
                            }
                            @Override
@@ -285,7 +314,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                scrollView.setVisibility(View.GONE);
                                tevMenuRight.setVisibility(View.GONE);
                                tipDialog.dismiss();
-                               mEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
+                               myEmptyView.show(false, getResources().getString(R.string.emptyView_mode_desc_fail_title), getResources().getString(R.string.emptyView_mode_desc_fail_desc), getResources().getString(R.string.emptyView_mode_desc_retry), new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
                                        initData();

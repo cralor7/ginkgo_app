@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\file\aaa\ginkgo_app\ginkgo_app\app\app.iml" filepath="E:\file\aaa\ginkgo_app\ginkgo_app\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ginkgo_app.iml" filepath="$PROJECT_DIR$/ginkgo_app.iml" />
-      <module fileurl="file://E:\file\aaa\ginkgo_app\ginkgo_app\ginkgo_app.iml" filepath="E:\file\aaa\ginkgo_app\ginkgo_app\ginkgo_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://E:\file\aaa\ginkgo_app\ginkgo_app\library\library.iml" filepath="E:\file\aaa\ginkgo_app\ginkgo_app\library\library.iml" />
     </modules>
   </component>
 </project>

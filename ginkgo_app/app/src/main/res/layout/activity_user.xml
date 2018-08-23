@@ -225,6 +225,7 @@
             android:minWidth="100dp"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
+            android:inputType="textEmailAddress"
             android:background="@null"
             android:layout_toRightOf="@+id/text15"
             android:text="Item"/>
@@ -258,6 +259,7 @@
             android:padding="5dp"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
+            android:inputType="phone"
             android:minWidth="100dp"
             android:layout_toRightOf="@+id/text16"
             android:text="Item"/>
@@ -291,6 +293,8 @@
             android:background="@null"
             android:layout_marginRight="10dp"
             android:minWidth="100dp"
+            android:inputType="phone"
+            android:maxLength="11"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/text17"
             android:text="Item"/>

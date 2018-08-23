@@ -22,7 +22,6 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.qk.Constant;
-import com.qk.GApp;
 import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
@@ -31,11 +30,14 @@ import com.qk.util.Urls;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+<<<<<<< HEAD
 import java.io.File;
 
 import okhttp3.Request;
 
 import static com.qk.GApp.context;
+=======
+>>>>>>> b2db117fcc33e1a553d35aa6c16ca6d0ad8d73d5
 
 /**
  * @author fengyezong&cuiweilong
@@ -68,8 +70,6 @@ public class SplashActivity extends AppCompatActivity {
 
     /**
      * 打开程序时判断是否已经登陆过，且token有效
-     * ccccccccccc
-     * cccccccc
      */
     private void initView() {
         if("".equals(token)||"value".equals(token)){
