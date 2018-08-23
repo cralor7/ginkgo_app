@@ -9,21 +9,31 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.format.Formatter;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.qk.Constant;
 import com.qk.GApp;
 import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
+import com.qk.util.Urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+
+import okhttp3.Request;
 
 import static com.qk.GApp.context;
 
@@ -32,7 +42,7 @@ import static com.qk.GApp.context;
  * @date 2018/8/1
  * 启动页 Activity
  */
-public class SplashActivity extends Activity {
+public class SplashActivity extends AppCompatActivity {
 
     Handler handler;
     /**
@@ -96,9 +106,10 @@ public class SplashActivity extends Activity {
 //                                    startActivity(intent);
 //                                    finish();
                                     if(Constant.VERSION.equals(version)){
-                                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                                        getVersion();
+                                   /*     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                         startActivity(intent);
-                                        finish();
+                                        finish();*/
                                     }else{
                                         Log.e("SplashActivity","需要更新版本到---"+version);
                                         Toast.makeText(ctx, "您需要更新新版本", Toast.LENGTH_SHORT).show();
@@ -133,7 +144,8 @@ public class SplashActivity extends Activity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
-
+//
+                        fileDownload();
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -159,5 +171,52 @@ public class SplashActivity extends Activity {
         Toast.makeText(ctx, "按了返回键", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        OkGo.getInstance().cancelTag(this);
+    }
+
+    public void fileDownload() {
+        OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")//
+                .tag(this)//
+                .headers("header1", "headerValue1")//
+                .params("param1", "paramValue1")//
+                .execute(new FileCallback("app.apk") {
+
+
+
+                    @Override
+                    public void onSuccess(Response<File> response) {
+//                        handleResponse(response);
+//                        btnFileDownload.setText("下载完成");
+                    }
+
+                    @Override
+                    public void onError(Response<File> response) {
+//                        handleError(response);
+//                        btnFileDownload.setText("下载出错");
+                    }
+
+                    @Override
+                    public void downloadProgress(Progress progress) {
+                        System.out.println(progress);
+                        String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
+                        String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
+                        String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
+//                        String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
+//                        String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
+//                        tvDownloadSize.setText(downloadLength + "/" + totalLength);
+//                        String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
+//                        tvNetSpeed.setText(String.format("%s/s", speed));
+//                        tvProgress.setText(numberFormat.format(progress.fraction));
+//                        pbProgress.setMax(10000);
+//                        pbProgress.setProgress((int) (progress.fraction * 10000));
+//                    }
+                    }
+                });
+
 
 }
+    }

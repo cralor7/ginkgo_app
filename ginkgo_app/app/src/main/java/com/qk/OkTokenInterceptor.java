@@ -3,11 +3,14 @@ package com.qk;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.utils.OkLogger;
 import com.qk.activity.sys.LoginActivity;
+import com.qk.module.GetCode;
 import com.qk.util.DataUtils;
 
 
@@ -15,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import okhttp3.HttpUrl;
@@ -23,7 +27,9 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.Buffer;
+import okio.BufferedSource;
 
 /**
  * @author fengyezong&cuiweilong
@@ -41,27 +47,42 @@ public class OkTokenInterceptor implements Interceptor
         final String token = GApp.TOKEN;
         Request originalRequest = chain.request();
         HttpUrl originalHttpUrl = originalRequest.url();
-        Response originalResponse = chain.proceed(originalRequest);
+        final   Response originalResponse = chain.proceed(originalRequest);
+        ResponseBody responseBody = originalResponse.body();
         Log.e("拦截器","originalResponse----"+originalResponse.body());
         //排除的API（登录，刷新token的）
         if ((originalHttpUrl.url() + "").equals(Constant.NEW_TOKEN) || (originalHttpUrl.url() + "").equals(Constant.LOGIN))
         {
             return originalResponse;
         }
-        String code = "";
+        String code = "0";
+        BufferedSource source = responseBody.source();
+        source.request(Long.MAX_VALUE);
+        Buffer buffer = source.buffer();
+        Charset charset = UTF_8;
+        MediaType contentType = responseBody.contentType();
+        if (contentType != null) {
+            charset = contentType.charset(UTF_8);
+        }
+        String bodyString = buffer.clone().readString(charset);
+//        HttpResult httpResult = new Gson().fromJson(bodyString, HttpResult.class);
         try {
-            String data = originalResponse.body().string();
-            JSONObject jsonObject = new JSONObject(data);
+            JSONObject jsonObject = new JSONObject(bodyString);
             code = "" + jsonObject.get("code");
-            Log.v("dsdsd111" ,code);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+//        InputStream data = responseBody.byteStream();
+//        String data = isTokenExpired(originalResponse);
+//            JSONObject jsonObject = new JSONObject(data);
+//            code = "" + jsonObject.get("code");
+//            Log.v("dsdsd111" ,code);
         /*
          * code 等于 -3代表token失效
          * code 等于 -4代表refresh_token失效,需要重新登录
          */
-        Response originalResponse2 = originalResponse;
         if((Constant.TOKEN_OVERTIME).equals(code)){
 
             if (TextUtils.isEmpty(token))
@@ -105,8 +126,8 @@ public class OkTokenInterceptor implements Interceptor
             }
         }
 
-        originalRequest = chain.request();
-        originalResponse = chain.proceed(originalRequest);
+/*        originalRequest = chain.request();
+        originalResponse = chain.proceed(originalRequest);*/
         return originalResponse;
     }
 
@@ -157,6 +178,45 @@ public class OkTokenInterceptor implements Interceptor
             if (subtype.contains("x-www-form-urlencoded") || subtype.contains("json") || subtype.contains("xml") || subtype.contains("html")) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private String isTokenExpired(Response response) {
+            ResponseBody body = response.body();
+            if (body != null){
+                try {
+                    MediaType mediaType = body.contentType();
+                    if (mediaType != null) {
+                        if(isText(mediaType)) {
+                            String resp = body.string();
+                            GetCode model = new Gson().fromJson(resp, GetCode.class);
+                            //4061是与后台商量的token失效后的错误码，具体应根据自己的项目决定
+                                return model.getData();
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        return "";
+    }
+
+    private boolean isText(MediaType mediaType)
+    {
+        if (mediaType.type() != null && mediaType.type().equals("text"))
+        {
+            return true;
+        }
+        if (mediaType.subtype() != null)
+        {
+            if (mediaType.subtype().equals("json") ||
+                    mediaType.subtype().equals("xml") ||
+                    mediaType.subtype().equals("html") ||
+                    mediaType.subtype().equals("webviewhtml")
+                    )
+                return true;
         }
         return false;
     }
