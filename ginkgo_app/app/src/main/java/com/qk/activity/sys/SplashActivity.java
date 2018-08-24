@@ -4,16 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
@@ -26,25 +28,23 @@ import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
 import com.qk.util.Urls;
+import com.qk.view.NumberProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-<<<<<<< HEAD
 import java.io.File;
+import java.text.NumberFormat;
 
 import okhttp3.Request;
 
-import static com.qk.GApp.context;
-=======
->>>>>>> b2db117fcc33e1a553d35aa6c16ca6d0ad8d73d5
 
 /**
  * @author fengyezong&cuiweilong
  * @date 2018/8/1
  * 启动页 Activity
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity implements View.OnClickListener {
 
     Handler handler;
     /**
@@ -53,7 +53,20 @@ public class SplashActivity extends AppCompatActivity {
     private String token;
 
     private Context ctx;
+    private static final int REQUEST_PERMISSION_STORAGE = 0x01;
+    private  Button btnFileDownload;
+    private  TextView tvDownloadSize;
+    private TextView tvProgress;
+    private  TextView tvNetSpeed;
+    private  NumberProgressBar pbProgress;
 
+    //
+//        @Bind(R.id.fileDownload) Button btnFileDownload;
+//        @Bind(R.id.downloadSize) TextView tvDownloadSize;
+//        @Bind(R.id.tvProgress) TextView tvProgress;
+//        @Bind(R.id.netSpeed) TextView tvNetSpeed;
+//        @Bind(R.id.pbProgress) NumberProgressBar pbProgress;
+    private NumberFormat numberFormat;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //去掉标题栏
@@ -65,6 +78,8 @@ public class SplashActivity extends AppCompatActivity {
         handler = new Handler(Looper.getMainLooper());
         //取出存放在SharedPreferences中的数据,第一个参数是写入是的键，第二个参数是如果没有获取到数据就默认返回的值。
         token = DataUtils.getLocalData(this, "token", "");
+        numberFormat = NumberFormat.getPercentInstance();
+        numberFormat.setMinimumFractionDigits(2);
         initView();
     }
 
@@ -72,6 +87,12 @@ public class SplashActivity extends AppCompatActivity {
      * 打开程序时判断是否已经登陆过，且token有效
      */
     private void initView() {
+        btnFileDownload = findViewById(R.id.fileDownload);
+        tvDownloadSize = findViewById(R.id.downloadSize);
+        tvProgress = findViewById(R.id.tvProgress);
+        tvNetSpeed = findViewById(R.id.netSpeed);
+        pbProgress = findViewById(R.id.pbProgress);
+        btnFileDownload.setOnClickListener(this);
         if("".equals(token)||"value".equals(token)){
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -106,13 +127,13 @@ public class SplashActivity extends AppCompatActivity {
 //                                    startActivity(intent);
 //                                    finish();
                                     if(Constant.VERSION.equals(version)){
-                                        getVersion();
-                                   /*     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                         startActivity(intent);
-                                        finish();*/
+                                        finish();
                                     }else{
                                         Log.e("SplashActivity","需要更新版本到---"+version);
                                         Toast.makeText(ctx, "您需要更新新版本", Toast.LENGTH_SHORT).show();
+                                        getVersion();
                                     }
                                 }else{
                                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
@@ -141,17 +162,18 @@ public class SplashActivity extends AppCompatActivity {
         new AlertDialog.Builder(ctx)
                 .setTitle("提示")
                 .setMessage("请更新最新版本")
+                .setCancelable(false)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
-//
-                        fileDownload();
+                        finish();
+                        getApk();
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
-
+                        finish();
                     }
                 })
                 .show();
@@ -167,56 +189,66 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         Log.e("SplashActivity","按了返回键");
         Toast.makeText(ctx, "按了返回键", Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //Activity销毁时，取消网络请求
-        OkGo.getInstance().cancelTag(this);
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fileDownload:
+                Toast.makeText(ctx, "dianjixiazai ", Toast.LENGTH_SHORT).show();
+//                fileDownload(v);
+                Uri uri = Uri.parse("https://lighttruck.com.cn:8086/app.apk");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                break;
+        }
     }
 
-    public void fileDownload() {
-        OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")//
-                .tag(this)//
-                .headers("header1", "headerValue1")//
-                .params("param1", "paramValue1")//
-                .execute(new FileCallback("app.apk") {
+
+        public void fileDownload(View view) {
+            OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")//
+                    .tag(1)//
+                    .headers("header1", "headerValue1")//
+                    .params("param1", "paramValue1")//
+                    .execute(new FileCallback("app.apk") {
 
 
 
-                    @Override
-                    public void onSuccess(Response<File> response) {
-//                        handleResponse(response);
-//                        btnFileDownload.setText("下载完成");
-                    }
+                        @Override
+                        public void onSuccess(Response<File> response) {
+//                            handleResponse(response);
+                            btnFileDownload.setText("下载完成");
+                        }
 
-                    @Override
-                    public void onError(Response<File> response) {
-//                        handleError(response);
-//                        btnFileDownload.setText("下载出错");
-                    }
+                        @Override
+                        public void onError(Response<File> response) {
+//                            handleError(response);
+                            btnFileDownload.setText("下载出错");
+                        }
 
-                    @Override
-                    public void downloadProgress(Progress progress) {
-                        System.out.println(progress);
-                        String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
-                        String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
-                        String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
-//                        String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
-//                        String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
-//                        tvDownloadSize.setText(downloadLength + "/" + totalLength);
-//                        String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
-//                        tvNetSpeed.setText(String.format("%s/s", speed));
-//                        tvProgress.setText(numberFormat.format(progress.fraction));
-//                        pbProgress.setMax(10000);
-//                        pbProgress.setProgress((int) (progress.fraction * 10000));
-//                    }
-                    }
-                });
+                        @Override
+                        public void downloadProgress(Progress progress) {
+                            System.out.println(progress);
+                            String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
+                            String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
+                            tvDownloadSize.setText(downloadLength + "/" + totalLength);
+                            String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
+                            tvNetSpeed.setText(String.format("%s/s", speed));
+                            tvProgress.setText(numberFormat.format(progress.fraction));
+                            pbProgress.setMax(10000);
+                            pbProgress.setProgress((int) (progress.fraction * 10000));
+                        }
+                    });
 
+    }
 
+    public void getApk(){
+        Uri uri = Uri.parse("https://lighttruck.com.cn:8086/app.apk");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 }
-    }

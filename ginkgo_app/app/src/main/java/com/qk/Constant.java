@@ -11,11 +11,9 @@ public class Constant {
      */
   //  private static String server_url="http://10.2.72.112:5000/ginkgo/";
     //private static String server_url="http://10.2.72.155:8080/app_server/";
-<<<<<<< HEAD
+
     private static String server_url="http://10.2.72.112:8761/";
-=======
-//    private static String server_url="http://10.2.72.112:8761/";
->>>>>>> b2db117fcc33e1a553d35aa6c16ca6d0ad8d73d5
+
     /**
      * 检查token是否有效接口
      */
