@@ -199,27 +199,12 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                     phone.setBackgroundResource(R.drawable.user_edittext_bg);
                     mobile.setBackgroundResource(R.drawable.user_edittext_bg);
                 }else{
-                    //验证手机号格式
-                    if(EditTextUtils.getString(mobile).length() < Constant.PHONE_LENGTH){
-                        Toast.makeText(ctx, "手机号格式不正确", Toast.LENGTH_SHORT).show();
-                        mobile.setFocusable(true);
-                        mobile.setFocusableInTouchMode(true);
-                        mobile.requestFocus();
-                        return;
-                    }
-                    //验证邮箱格式
-                    if(!EditTextUtils.getString(email).matches(Constant.EMAIL_FORMAT)){
-                        Toast.makeText(ctx, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
-                        email.setFocusable(true);
-                        email.setFocusableInTouchMode(true);
-                        email.requestFocus();
-                        return;
-                    }
                     email.setFocusable(false);
                     tevMenuRight.setText("修改");
                     editTextable(email, false);
                     editTextable(phone, false);
                     editTextable(mobile, false);
+                    /**判断有没有做出修改，没有修改的话给于提示，不请求修改接口*/
                     if(oldEmail.equals(EditTextUtils.getString(email)) && oldPhone.equals(EditTextUtils.getString(phone)) && oldMobile.equals(EditTextUtils.getString(mobile))){
                         Toast.makeText(ctx, "您并没有做出修改", Toast.LENGTH_SHORT).show();
                         email.setBackgroundResource(R.drawable.user_edittext_nobg);
@@ -227,7 +212,22 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                         mobile.setBackgroundResource(R.drawable.user_edittext_nobg);
                         return;
                     }
-
+                    /**验证手机号格式*/
+                    if(EditTextUtils.getString(mobile).length()!=0 && EditTextUtils.getString(mobile).length() < Constant.PHONE_LENGTH){
+                        Toast.makeText(ctx, "手机号格式不正确", Toast.LENGTH_SHORT).show();
+                        mobile.setFocusable(true);
+                        mobile.setFocusableInTouchMode(true);
+                        mobile.requestFocus();
+                        return;
+                    }
+                    /**验证邮箱格式*/
+                    if(EditTextUtils.getString(email).length()!=0 && !EditTextUtils.getString(email).matches(Constant.EMAIL_FORMAT)){
+                        Toast.makeText(ctx, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                        email.setFocusable(true);
+                        email.setFocusableInTouchMode(true);
+                        email.requestFocus();
+                        return;
+                    }
                     updateUser();
                     oldEmail =  EditTextUtils.getString(email);
                     oldPhone =  EditTextUtils.getString(phone);

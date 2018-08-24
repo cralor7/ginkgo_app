@@ -40,7 +40,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     private String token;
     private String username;
     private Handler handler;
-    Context ctx;
+    private Context ctx;
     private CountDownTimer timer;
     private EditText phoneNumber;
     private EditText checkCode;
@@ -63,11 +63,9 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     public void initView() {
         //修改引入的通用头部的标题
         ViewUtils.topLayout(this, "忘记密码");
-
         btnSubmit = findViewById(R.id.btn_submit);
         btnCancel = findViewById(R.id.btn_cancel);
         progressBar = findViewById(R.id.progress_edit);
-
         phoneNumber = findViewById(R.id.get_phone);
         checkCode = findViewById(R.id.checkcode_text);
         btnCheckCode = findViewById(R.id.checkcode_btn);

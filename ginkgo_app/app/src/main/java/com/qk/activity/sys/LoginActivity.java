@@ -168,13 +168,13 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                                     String pwd = edtPassword.getText().toString();
                                     String token = response.body().getToken();
                                     ArrayList<ArrayList<Menu>> menuList = response.body().getMenuList();
-
                                     String company = response.body().getUserIfo().getCompany();
                                     String office = response.body().getUserIfo().getOffice();
+                                    String username = "付薛龙";
                                     //保存用户权限列表
                                     DataUtils.saveMenu(menuList,ctx);
                                     //保存用户的登录信息
-                                    saveUserInfo(ctx, name, pwd, token, ckbRemember, company, office);
+                                    saveUserInfo(ctx, name, pwd, token, ckbRemember,username, company, office);
                                     Toast.makeText(ctx, "登陆成功", Toast.LENGTH_SHORT).show();
                                     finish();
                                     Intent intent2 = new Intent(ctx, MainActivity.class);
@@ -203,12 +203,13 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
      * @param company 公司
      * @param office 部门
      */
-    public static void saveUserInfo(Context context, String username, String password, String token, CheckBox ckbRemember, String company, String office){
+    public static void saveUserInfo(Context context, String username, String password, String token, CheckBox ckbRemember,String name, String company, String office){
         //记住密码
         if(ckbRemember.isChecked()) {
             DataUtils.saveLocalData(context, "password", password);
         }
         DataUtils.saveLocalData(context, "username", username);
+        DataUtils.saveLocalData(context, "name", name);
         DataUtils.saveLocalData(context, "token", token);
         DataUtils.saveLocalData(context, "company", company);
         DataUtils.saveLocalData(context, "office", office);
