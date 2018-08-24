@@ -79,13 +79,11 @@ public class SearchOrderRetrievalDialogFragment extends DialogFragment implement
         searchJXSCODE = view.findViewById(R.id.search_jxscode);
         searchSubmit = view.findViewById(R.id.search_submit);
         searchClean = view.findViewById(R.id.search_clean);
-
         //设置EditText不可编辑但可点击,隐藏光标
         searchYWMS.setCursorVisible(false);
         searchYWMS.setFocusable(false);
         searchYWMS.setFocusableInTouchMode(false);
         searchYWMS.setOnClickListener(this);
-
         searchCancel.setOnClickListener(this);
         searchSubmit.setOnClickListener(this);
         searchClean.setOnClickListener(this);

@@ -168,9 +168,9 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                                     String pwd = edtPassword.getText().toString();
                                     String token = response.body().getToken();
                                     ArrayList<ArrayList<Menu>> menuList = response.body().getMenuList();
-                                    String company = response.body().getUserIfo().getCompany();
-                                    String office = response.body().getUserIfo().getOffice();
-                                    String username = "付薛龙";
+                                    String company = response.body().getUserInfo().getCompany();
+                                    String office = response.body().getUserInfo().getOffice();
+                                    String username = response.body().getUserInfo().getUsername();
                                     //保存用户权限列表
                                     DataUtils.saveMenu(menuList,ctx);
                                     //保存用户的登录信息

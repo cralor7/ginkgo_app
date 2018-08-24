@@ -16,10 +16,10 @@ public class Data {
     private LoginEntity data;
     private String tokenValid;
     private ArrayList<ArrayList<Menu>>  menuList;
-    private UserIfo userIfo;
+    private UserInfo userInfo;
 
 
-    public Data(String code, String error, String username, String message, String token, LoginEntity data, String tokenValid, ArrayList<ArrayList<Menu>> menuList, UserIfo userIfo) {
+    public Data(String code, String error, String username, String message, String token, LoginEntity data, String tokenValid, ArrayList<ArrayList<Menu>> menuList, UserInfo userIfo) {
         this.code = code;
         this.error = error;
         this.username = username;
@@ -28,7 +28,7 @@ public class Data {
         this.data = data;
         this.tokenValid = tokenValid;
         this.menuList = menuList;
-        this.userIfo = userIfo;
+        this.userInfo = userInfo;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Data {
                 ", data=" + data +
                 ", tokenValid='" + tokenValid + '\'' +
                 ", menuList=" + menuList +
-                ", userIfo=" + userIfo +
+                ", userInfo=" + userInfo +
                 '}';
     }
 
@@ -112,25 +112,33 @@ public class Data {
         this.menuList = menuList;
     }
 
-    public UserIfo getUserIfo() {
-        return userIfo;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setUserIfo(UserIfo userIfo) {
-        this.userIfo = userIfo;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     /**
      * 用户所属公司和部门
      */
-    public class UserIfo {
-
+    public class UserInfo {
+        String username;
         String company;
 
         String office;
 
         public String getCompany() {
             return company;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
 
         public void setCompany(String company) {
@@ -145,15 +153,17 @@ public class Data {
             this.office = office;
         }
 
-        public UserIfo(String company, String office) {
+        public UserInfo(String username, String company, String office) {
+            this.username = username;
             this.company = company;
             this.office = office;
         }
 
         @Override
         public String toString() {
-            return "UserIfo{" +
-                    "company='" + company + '\'' +
+            return "UserInfo{" +
+                    "username='" + username + '\'' +
+                    ", company='" + company + '\'' +
                     ", office='" + office + '\'' +
                     '}';
         }
