@@ -1,5 +1,6 @@
 package com.qk.activity.sys;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,12 +25,11 @@ import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.qk.Constant;
 import com.qk.R;
+import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
-<<<<<<< HEAD
-import com.qk.util.Urls;
+
 import com.qk.view.NumberProgressBar;
-=======
->>>>>>> 4b1c78b6f1d0f6be06e229747355b9a7ace773d3
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,12 +37,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.NumberFormat;
 
-<<<<<<< HEAD
-import okhttp3.Request;
-
-
-=======
->>>>>>> 4b1c78b6f1d0f6be06e229747355b9a7ace773d3
 /**
  * @author fengyezong&cuiweilong
  * @date 2018/8/1
