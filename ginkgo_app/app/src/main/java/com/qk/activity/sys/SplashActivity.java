@@ -203,6 +203,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
+            default:break;
         }
     }
 
