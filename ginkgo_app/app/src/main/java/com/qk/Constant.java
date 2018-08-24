@@ -9,16 +9,13 @@ public class Constant {
     /**
      * 服务器地址
      */
-<<<<<<< HEAD
-  //  private static String server_url="http://10.2.72.112:5000/ginkgo/";
+
+     private static String server_url="http://10.2.72.112:5000/ginkgo/";
     //private static String server_url="http://10.2.72.155:8080/app_server/";
 
-    private static String server_url="http://10.2.72.112:8761/";
-=======
-    private static String server_url="http://10.2.72.112:5000/ginkgo/";
-//    private static String server_url="http://10.2.72.155:8080/app_server/";
 //    private static String server_url="http://10.2.72.112:8761/";
->>>>>>> 4b1c78b6f1d0f6be06e229747355b9a7ace773d3
+
+
 
     /**
      * 检查token是否有效接口
