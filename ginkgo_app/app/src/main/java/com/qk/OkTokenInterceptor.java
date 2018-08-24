@@ -3,7 +3,6 @@ package com.qk;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -13,12 +12,10 @@ import com.qk.activity.sys.LoginActivity;
 import com.qk.module.GetCode;
 import com.qk.util.DataUtils;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import okhttp3.HttpUrl;
@@ -55,7 +52,7 @@ public class OkTokenInterceptor implements Interceptor
         {
             return originalResponse;
         }
-        String code = "0";
+        String code = "";
         BufferedSource source = responseBody.source();
         source.request(Long.MAX_VALUE);
         Buffer buffer = source.buffer();
@@ -65,7 +62,6 @@ public class OkTokenInterceptor implements Interceptor
             charset = contentType.charset(UTF_8);
         }
         String bodyString = buffer.clone().readString(charset);
-//        HttpResult httpResult = new Gson().fromJson(bodyString, HttpResult.class);
         try {
             JSONObject jsonObject = new JSONObject(bodyString);
             code = "" + jsonObject.get("code");
@@ -73,12 +69,6 @@ public class OkTokenInterceptor implements Interceptor
             e.printStackTrace();
         }
 
-
-//        InputStream data = responseBody.byteStream();
-//        String data = isTokenExpired(originalResponse);
-//            JSONObject jsonObject = new JSONObject(data);
-//            code = "" + jsonObject.get("code");
-//            Log.v("dsdsd111" ,code);
         /*
          * code 等于 -3代表token失效
          * code 等于 -4代表refresh_token失效,需要重新登录
@@ -100,7 +90,7 @@ public class OkTokenInterceptor implements Interceptor
                         .execute();
                 String data2 = response.body().string();
                 String newToken = "";
-                String code1 = "";
+                String code1;
                 Log.v("refresh_token", "刷新了token");
                 try {
                     JSONObject jsonObject2= new JSONObject(data2);
@@ -125,9 +115,6 @@ public class OkTokenInterceptor implements Interceptor
                 return chain.proceed(request2);
             }
         }
-
-/*        originalRequest = chain.request();
-        originalResponse = chain.proceed(originalRequest);*/
         return originalResponse;
     }
 

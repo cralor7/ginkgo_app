@@ -96,7 +96,6 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             default:break;
         }
     }
-
     /**
      * 修改密码
      */
@@ -153,11 +152,11 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                //判断是否修改成功 如果code是successde code则成功，否则失败
+                                //判断是否修改成功 如果code是success code 则成功，否则失败
                                 if(Constant.SUCCESS_CODE.equals(code)){
                                     //保存新的密码到本地
                                     DataUtils.updateLocalData(ctx,"password", newPwd);
-                                    Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ctx, "修改成功,请重新登录", Toast.LENGTH_SHORT).show();
                                     finish();
                                     //重新登录
                                     Intent intent2 = new Intent(ctx, LoginActivity.class);
