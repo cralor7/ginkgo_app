@@ -115,8 +115,10 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                 //     startActivity(new Intent(this,RegisterActivity.class));
                 break;
             case R.id.tev_forget_login:
-                Toast.makeText(ctx, "忘记密码", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, ForgetPasswordActivity.class));
+
+ /*               Toast.makeText(ctx, "忘记密码", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ForgetPasswordActivity.class));*/
+
                 break;
             case R.id.lel_remember_login:
                 ckbRemember.setChecked(!ckbRemember.isChecked());

@@ -96,7 +96,6 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             default:break;
         }
     }
-
     /**
      * 修改密码
      */
