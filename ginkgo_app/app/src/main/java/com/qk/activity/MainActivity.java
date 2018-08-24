@@ -71,21 +71,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         imvSet.setOnClickListener(this);
         imvUserInformation.setOnClickListener(this);
         expandableListView = findViewById(R.id.expandableListView);
-
         username = DataUtils.getLocalData(ctx, "username", "你好");
         String company = "归属公司:"+DataUtils.getLocalData(ctx, "company", "济南轻卡销售部");
         String office = "归属部门:"+DataUtils.getLocalData(ctx, "office", "济南轻卡");
-        tevUsername.setText(username);
+        String name = DataUtils.getLocalData(ctx, "name", "你好");
+        tevUsername.setText(name);
         tevCompany.setText(company);
         tevOffice.setText(office);
-
         MyBaseExpandableListWithRecycleAdapter myBaseExpandableListWithGridViewAdapter
                 =new MyBaseExpandableListWithRecycleAdapter(this, parentMapList, childMapList);
         expandableListView.setGroupIndicator(null);
         expandableListView.setAdapter(myBaseExpandableListWithGridViewAdapter);
         /* 控制是否点击一个一级菜单的时候其他一级菜单都关闭*/
         setListViewKG();
-
     }
 
     @Override
@@ -126,8 +124,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void setListViewKG(){
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-
             @Override
             public void onGroupExpand(int groupPosition) {
                 // 把除了自己外的，其它全部关闭

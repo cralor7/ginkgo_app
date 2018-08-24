@@ -213,21 +213,16 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                     .headers("header1", "headerValue1")//
                     .params("param1", "paramValue1")//
                     .execute(new FileCallback("app.apk") {
-
-
-
                         @Override
                         public void onSuccess(Response<File> response) {
 //                            handleResponse(response);
                             btnFileDownload.setText("下载完成");
                         }
-
                         @Override
                         public void onError(Response<File> response) {
 //                            handleError(response);
                             btnFileDownload.setText("下载出错");
                         }
-
                         @Override
                         public void downloadProgress(Progress progress) {
                             System.out.println(progress);

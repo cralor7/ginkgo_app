@@ -100,6 +100,7 @@
                 android:layout_gravity="right"
                 android:gravity="center"
                 android:text="忘记密码？"
+                android:enabled="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="@color/bg_blue"
