@@ -27,9 +27,7 @@ import com.qk.Constant;
 import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
-
 import com.qk.view.NumberProgressBar;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
