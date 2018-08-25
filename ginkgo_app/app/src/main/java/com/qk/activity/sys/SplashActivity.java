@@ -209,10 +209,10 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
 
         public void fileDownload(View view) {
-            OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")//
-                    .tag(1)//
-                    .headers("header1", "headerValue1")//
-                    .params("param1", "paramValue1")//
+            OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")
+                    .tag(1)
+                    .headers("header1", "headerValue1")
+                    .params("param1", "paramValue1")
                     .execute(new FileCallback("app.apk") {
                         @Override
                         public void onSuccess(Response<File> response) {
