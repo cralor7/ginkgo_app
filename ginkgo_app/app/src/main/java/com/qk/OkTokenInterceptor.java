@@ -201,7 +201,7 @@ public class OkTokenInterceptor implements Interceptor
                     mediaType.subtype().equals("xml") ||
                     mediaType.subtype().equals("html") ||
                     mediaType.subtype().equals("webviewhtml")
-                    )
+                    ) {}
                 return true;
         }
         return false;
