@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.convert.FileConvert;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.qk.BuildConfig;
@@ -34,7 +36,9 @@ import com.qk.Constant;
 import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
+
 import com.qk.view.NumberProgressBar;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +56,13 @@ public class SplashActivity extends Activity{
     public static final int INSTALL_APK_REQUESTCODE = 3;
     public static final int GET_UNKNOWN_APP_SOURCES = 7;
     private File apkFile;
+    /**
+     * 可以额外指定文件的下载目录和下载完成后的文件名
+     */
+    private String destFileDir = Environment.getExternalStorageDirectory() + FileConvert.DM_TARGET_FOLDER + "qkDownload" + File.separator;
+
+    private String destFileName = "qkApp.apk";
+
 
     Handler handler;
     /**
@@ -123,16 +134,7 @@ public class SplashActivity extends Activity{
                                 }
                                 Log.v("data",""+code);
                                 if(Constant.SUCCESS_CODE.equals(code)){
-<<<<<<< HEAD
 
-=======
-//                                    GApp.TOKEN = token;
-//                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-//                                    startActivity(intent);
-//
-//
-//                                 finish();
->>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
                                     if(Constant.VERSION.equals(version)){
                                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                         startActivity(intent);
@@ -157,12 +159,9 @@ public class SplashActivity extends Activity{
         }, 3);
     }
 
-<<<<<<< HEAD
     /**
      * 更新弹出框
      */
-=======
->>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
     public void getVersion(){
         //退出的确认弹出框
         new AlertDialog.Builder(ctx)
@@ -216,20 +215,28 @@ public class SplashActivity extends Activity{
             ActivityCompat.requestPermissions(SplashActivity.this, new String[]
                     {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
         }
-        OkGo.<File>get("http://10.2.72.105:8080/ceshi.pdf")
+        OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")
                 .tag(1)
                 .headers("header1", "headerValue1")
                 .params("param1", "paramValue1")
-                .execute(new FileCallback("ceshi.pdf") {
+                /*
+                * 文件目录如果不指定,默认下载的目录为 sdcard/download/,文件名如果不指定,则按照以下规则命名:
+                1.首先检查用户是否传入了文件名,如果传入,将以用户传入的文件名命名
+                2.如果没有传入,那么将会检查服务端返回的响应头是否含有Content-Disposition=attachment;filename=FileName.txt该种形式的响应头,如果有,则按照该响应头中指定的文件名命名文件,如FileName.txt
+                3.如果上述响应头不存在,则检查下载的文件url,例如:http://image.baidu.com/abc.jpg,那么将会自动以abc.jpg命名文件
+                4.如果url也把文件名解析不出来,那么最终将以"unknownfile_" + System.currentTimeMillis()命名文件
+                */
+//                .execute() {  //默认的
+                .execute(new FileCallback(""+destFileDir, ""+destFileName) {
                     @Override
                     public void onSuccess(Response<File> response) {
 
-<<<<<<< HEAD
                         String absolutePath = response.body().getAbsolutePath();
                         apkFile = response.body().getAbsoluteFile();
+                        Log.e("appInstall---", ""+absolutePath);
 
                         //Android8.0 版本更新无法自动安装问题解决
-                    /*    if (Build.VERSION.SDK_INT >= 26) {
+                        if (Build.VERSION.SDK_INT >= 26) {
                             //来判断应用是否有权限安装apk
                             Log.e("appInstall---", "android版本8.0以上");
                             boolean installAllowed= getPackageManager().canRequestPackageInstalls();
@@ -246,7 +253,7 @@ public class SplashActivity extends Activity{
                         } else {
                             Log.e("appInstall---", "android版本低于8.0");
                             installApk(apkFile);
-                        }*/
+                        }
                     }
                     @Override
                     public void onError(Response<File> response) {
@@ -274,8 +281,6 @@ public class SplashActivity extends Activity{
      * @param permissions permissions
      * @param grantResults grantResults
      */
-=======
->>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -332,41 +337,8 @@ public class SplashActivity extends Activity{
         finish();
     }
 
-<<<<<<< HEAD
 
 
-=======
-        public void fileDownload(View view) {
-            OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")
-                    .tag(1)
-                    .headers("header1", "headerValue1")
-                    .params("param1", "paramValue1")
-                    .execute(new FileCallback("app.apk") {
-                        @Override
-                        public void onSuccess(Response<File> response) {
-//                            handleResponse(response);
-                            btnFileDownload.setText("下载完成");
-                        }
-                        @Override
-                        public void onError(Response<File> response) {
-//                            handleError(response);
-                            btnFileDownload.setText("下载出错");
-                        }
-                        @Override
-                        public void downloadProgress(Progress progress) {
-                            System.out.println(progress);
-                            String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
-                            String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
-                            tvDownloadSize.setText(downloadLength + "/" + totalLength);
-                            String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
-                            tvNetSpeed.setText(String.format("%s/s", speed));
-                            tvProgress.setText(numberFormat.format(progress.fraction));
-                            pbProgress.setMax(10000);
-                            pbProgress.setProgress((int) (progress.fraction * 10000));
-                        }
-                    });
-    }
->>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
 
     /**
      * 调用默认浏览器下载apk
