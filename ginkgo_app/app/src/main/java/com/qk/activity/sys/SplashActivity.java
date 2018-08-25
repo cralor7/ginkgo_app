@@ -151,9 +151,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                         });
             }
         }, 3);
-
     }
-
 
     public void getVersion(){
         //退出的确认弹出框
@@ -192,7 +190,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         Toast.makeText(ctx, "按了返回键", Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -206,7 +203,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
             default:break;
         }
     }
-
 
         public void fileDownload(View view) {
             OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")
@@ -237,7 +233,6 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                             pbProgress.setProgress((int) (progress.fraction * 10000));
                         }
                     });
-
     }
 
     public void getApk(){
