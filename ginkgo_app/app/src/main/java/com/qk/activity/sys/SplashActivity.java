@@ -34,9 +34,7 @@ import com.qk.Constant;
 import com.qk.R;
 import com.qk.activity.MainActivity;
 import com.qk.util.DataUtils;
-
 import com.qk.view.NumberProgressBar;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -125,7 +123,16 @@ public class SplashActivity extends Activity{
                                 }
                                 Log.v("data",""+code);
                                 if(Constant.SUCCESS_CODE.equals(code)){
+<<<<<<< HEAD
 
+=======
+//                                    GApp.TOKEN = token;
+//                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                                    startActivity(intent);
+//
+//
+//                                 finish();
+>>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
                                     if(Constant.VERSION.equals(version)){
                                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                         startActivity(intent);
@@ -150,9 +157,12 @@ public class SplashActivity extends Activity{
         }, 3);
     }
 
+<<<<<<< HEAD
     /**
      * 更新弹出框
      */
+=======
+>>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
     public void getVersion(){
         //退出的确认弹出框
         new AlertDialog.Builder(ctx)
@@ -214,6 +224,7 @@ public class SplashActivity extends Activity{
                     @Override
                     public void onSuccess(Response<File> response) {
 
+<<<<<<< HEAD
                         String absolutePath = response.body().getAbsolutePath();
                         apkFile = response.body().getAbsoluteFile();
 
@@ -263,6 +274,8 @@ public class SplashActivity extends Activity{
      * @param permissions permissions
      * @param grantResults grantResults
      */
+=======
+>>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -319,8 +332,41 @@ public class SplashActivity extends Activity{
         finish();
     }
 
+<<<<<<< HEAD
 
 
+=======
+        public void fileDownload(View view) {
+            OkGo.<File>get("https://lighttruck.com.cn:8086/app.apk")
+                    .tag(1)
+                    .headers("header1", "headerValue1")
+                    .params("param1", "paramValue1")
+                    .execute(new FileCallback("app.apk") {
+                        @Override
+                        public void onSuccess(Response<File> response) {
+//                            handleResponse(response);
+                            btnFileDownload.setText("下载完成");
+                        }
+                        @Override
+                        public void onError(Response<File> response) {
+//                            handleError(response);
+                            btnFileDownload.setText("下载出错");
+                        }
+                        @Override
+                        public void downloadProgress(Progress progress) {
+                            System.out.println(progress);
+                            String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
+                            String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
+                            tvDownloadSize.setText(downloadLength + "/" + totalLength);
+                            String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
+                            tvNetSpeed.setText(String.format("%s/s", speed));
+                            tvProgress.setText(numberFormat.format(progress.fraction));
+                            pbProgress.setMax(10000);
+                            pbProgress.setProgress((int) (progress.fraction * 10000));
+                        }
+                    });
+    }
+>>>>>>> 4ae85da24bcc7fd0c4e2a4e00ad537b018a0b60a
 
     /**
      * 调用默认浏览器下载apk

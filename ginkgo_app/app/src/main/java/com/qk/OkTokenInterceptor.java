@@ -68,7 +68,6 @@ public class OkTokenInterceptor implements Interceptor
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         /*
          * code 等于 -3代表token失效
          * code 等于 -4代表refresh_token失效,需要重新登录

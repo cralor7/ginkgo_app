@@ -133,8 +133,8 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onSuccess(Response<String> response) {
-                                        String data = response.body();
                                         try {
+                                            String data = response.body();
                                             JSONObject jsonObject=new JSONObject(data);
                                             CODE = jsonObject.get("code").toString();
                                             Toast.makeText(ctx, "CODE---"+CODE, Toast.LENGTH_SHORT).show();

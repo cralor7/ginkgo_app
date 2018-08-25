@@ -5,10 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -32,7 +29,6 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -63,7 +59,6 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
     private ScrollView scrollView;
     private String oldEmail,oldPhone,oldMobile;
     private Activity activity;
-    private Pattern pattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +86,6 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
         no = findViewById(R.id.text24);
         email = findViewById(R.id.text25);
         phone = findViewById(R.id.text26);
-//        phone.setInputType(InputType.TYPE_CLASS_PHONE);
         mobile = findViewById(R.id.text27);
         tevMenuRight = findViewById(R.id.menu_text_right);
         tevMenuRight.setVisibility(View.GONE);
@@ -204,7 +198,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                     editTextable(email, false);
                     editTextable(phone, false);
                     editTextable(mobile, false);
-                    /**判断有没有做出修改，没有修改的话给于提示，不请求修改接口*/
+                    /*判断有没有做出修改，没有修改的话给于提示，不请求修改接口*/
                     if(oldEmail.equals(EditTextUtils.getString(email)) && oldPhone.equals(EditTextUtils.getString(phone)) && oldMobile.equals(EditTextUtils.getString(mobile))){
                         Toast.makeText(ctx, "您并没有做出修改", Toast.LENGTH_SHORT).show();
                         email.setBackgroundResource(R.drawable.user_edittext_nobg);
@@ -212,7 +206,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                         mobile.setBackgroundResource(R.drawable.user_edittext_nobg);
                         return;
                     }
-                    /**验证手机号格式*/
+                    /*验证手机号格式*/
                     if(EditTextUtils.getString(mobile).length()!=0 && EditTextUtils.getString(mobile).length() < Constant.PHONE_LENGTH){
                         Toast.makeText(ctx, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                         mobile.setFocusable(true);
@@ -220,7 +214,7 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                         mobile.requestFocus();
                         return;
                     }
-                    /**验证邮箱格式*/
+                    /*验证邮箱格式*/
                     if(EditTextUtils.getString(email).length()!=0 && !EditTextUtils.getString(email).matches(Constant.EMAIL_FORMAT)){
                         Toast.makeText(ctx, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
                         email.setFocusable(true);
@@ -321,7 +315,6 @@ public class UserActivity extends BaseActivity  implements View.OnClickListener{
                                    }
                                });
                            }
-
                        });
            }
        }, 1);

@@ -237,7 +237,6 @@ public class GApp extends Application {
         }
     }
 
-
     /**
      * 获取每页显示的个数pageSize
      */
