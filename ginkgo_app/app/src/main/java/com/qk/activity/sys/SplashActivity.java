@@ -123,7 +123,9 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 //                                    GApp.TOKEN = token;
 //                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 //                                    startActivity(intent);
-//                                    finish();
+//
+//
+//                                 finish();
                                     if(Constant.VERSION.equals(version)){
                                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                         startActivity(intent);
