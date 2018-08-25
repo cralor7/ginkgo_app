@@ -162,25 +162,29 @@ public class LoginActivity extends BaseActivity implements  View.OnClickListener
                             }
                             @Override
                             public void onSuccess(Response<Data> response) {
-//                                判断是否登陆成功 如果code是SUCCESS_CODE成功 否则失败
-                                if(Constant.SUCCESS_CODE.equals(response.body().getCode())){
-                                    String name = edtUsername.getText().toString();
-                                    String pwd = edtPassword.getText().toString();
-                                    String token = response.body().getToken();
-                                    ArrayList<ArrayList<Menu>> menuList = response.body().getMenuList();
-                                    String company = response.body().getUserInfo().getCompany();
-                                    String office = response.body().getUserInfo().getOffice();
-                                    String username = response.body().getUserInfo().getUsername();
-                                    //保存用户权限列表
-                                    DataUtils.saveMenu(menuList,ctx);
-                                    //保存用户的登录信息
-                                    saveUserInfo(ctx, name, pwd, token, ckbRemember,username, company, office);
-                                    Toast.makeText(ctx, "登陆成功", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                    Intent intent2 = new Intent(ctx, MainActivity.class);
-                                    startActivity(intent2);
-                                }else{
-                                    Toast.makeText(ctx, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                try {
+                                    //判断是否登陆成功 如果code是SUCCESS_CODE成功 否则失败
+                                    if(Constant.SUCCESS_CODE.equals(response.body().getCode())){
+                                        String name = edtUsername.getText().toString();
+                                        String pwd = edtPassword.getText().toString();
+                                        String token = response.body().getToken();
+                                        ArrayList<ArrayList<Menu>> menuList = response.body().getMenuList();
+                                        String company = response.body().getUserInfo().getCompany();
+                                        String office = response.body().getUserInfo().getOffice();
+                                        String username = response.body().getUserInfo().getUsername();
+                                        //保存用户权限列表
+                                        DataUtils.saveMenu(menuList,ctx);
+                                        //保存用户的登录信息
+                                        saveUserInfo(ctx, name, pwd, token, ckbRemember,username, company, office);
+                                        Toast.makeText(ctx, "登陆成功", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        Intent intent2 = new Intent(ctx, MainActivity.class);
+                                        startActivity(intent2);
+                                    }else{
+                                        Toast.makeText(ctx, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
                             }
                             @Override
