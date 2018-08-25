@@ -137,27 +137,26 @@ public class ForgetChangePasswordActivity extends BaseActivity implements View.O
                             }
                             @Override
                             public void onSuccess(Response<String> response) {
-                                String data = response.body();
-                                String code = "";
-                                String message = "";
                                 try {
+                                    String data = response.body();
                                     JSONObject jsonObject = new JSONObject(data);
-                                    code = jsonObject.get("code").toString();
-                                    message = jsonObject.get("message").toString();
-                                } catch (JSONException e) {
+                                    String code = "" + jsonObject.get("code").toString();
+                                    String message = "" + jsonObject.get("message").toString();
+
+                                    //判断是否修改成功 如果code是success code则成功，否则失败
+                                    if(Constant.SUCCESS_CODE.equals(code)){
+                                        //保存新的密码到本地
+                                        DataUtils.updateLocalData(ctx,"password", newPwd);
+                                        Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        //重新登录
+                                        Intent intent2 = new Intent(ctx, LoginActivity.class);
+                                        startActivity(intent2);
+                                    }else{
+                                        Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
                                     e.printStackTrace();
-                                }
-                                //判断是否修改成功 如果code是success code则成功，否则失败
-                                if(Constant.SUCCESS_CODE.equals(code)){
-                                    //保存新的密码到本地
-                                    DataUtils.updateLocalData(ctx,"password", newPwd);
-                                    Toast.makeText(ctx, "修改成功", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                    //重新登录
-                                    Intent intent2 = new Intent(ctx, LoginActivity.class);
-                                    startActivity(intent2);
-                                }else{
-                                    Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
                                 }
                             }
                             @Override

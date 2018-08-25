@@ -245,16 +245,15 @@ public class SetActivity extends BaseActivity implements View.OnClickListener,Co
                                             @Override
                                             public void onSuccess(Response<String> response) {
                                                 //这个就是返回来的结果
-                                                String data = response.body();
-                                                String code = "";
                                                 try {
+                                                    String data = response.body();
                                                     JSONObject jsonObject = new JSONObject(data);
-                                                    code = jsonObject.get("code").toString();
+                                                    String code = "" + jsonObject.get("code").toString();
+                                                    if(Constant.SUCCESS_CODE.equals(code)){
+                                                    }else{
+                                                    }
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
-                                                }
-                                                if(Constant.SUCCESS_CODE.equals(code)){
-                                                }else{
                                                 }
                                             }
                                             @Override
