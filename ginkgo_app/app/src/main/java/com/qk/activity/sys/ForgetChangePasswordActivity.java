@@ -90,7 +90,8 @@ public class ForgetChangePasswordActivity extends BaseActivity implements View.O
             case R.id.btn_cancel:
                 finish();
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 
@@ -146,7 +147,7 @@ public class ForgetChangePasswordActivity extends BaseActivity implements View.O
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                //判断是否修改成功 如果code是successde code则成功，否则失败
+                                //判断是否修改成功 如果code是success code则成功，否则失败
                                 if(Constant.SUCCESS_CODE.equals(code)){
                                     //保存新的密码到本地
                                     DataUtils.updateLocalData(ctx,"password", newPwd);
