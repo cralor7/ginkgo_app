@@ -19,7 +19,7 @@ public class Data {
     private UserInfo userInfo;
 
 
-    public Data(String code, String error, String username, String message, String token, LoginEntity data, String tokenValid, ArrayList<ArrayList<Menu>> menuList, UserInfo userIfo) {
+    public Data(String code, String error, String username, String message, String token, LoginEntity data, String tokenValid, ArrayList<ArrayList<Menu>> menuList, UserInfo userInfo) {
         this.code = code;
         this.error = error;
         this.username = username;
