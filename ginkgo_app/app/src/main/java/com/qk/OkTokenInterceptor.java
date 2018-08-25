@@ -48,7 +48,7 @@ public class OkTokenInterceptor implements Interceptor
         ResponseBody responseBody = originalResponse.body();
         Log.e("拦截器","originalResponse----"+originalResponse.body());
         //排除的API（登录，刷新token的）
-        if ((originalHttpUrl.url() + "").equals(Constant.NEW_TOKEN) || (originalHttpUrl.url() + "").equals(Constant.LOGIN))
+        if ((originalHttpUrl.url() + "").equals(Constant.NEW_TOKEN) || (originalHttpUrl.url() + "").equals(Constant.LOGIN)||(originalHttpUrl.url() + "").contains("http://10.2.72.105:8080/ceshi.pdf"))
         {
             return originalResponse;
         }

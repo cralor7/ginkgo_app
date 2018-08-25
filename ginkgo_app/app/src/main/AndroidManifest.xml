@@ -39,9 +39,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 设置nof权限 -->
     <uses-permission android:name="android.permission.NFC" />
+
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
+
     <application
         android:name=".GApp"
         android:allowBackup="true"
@@ -50,6 +52,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -66,10 +69,6 @@
         <activity
             android:name=".activity.sys.SplashActivity"
             android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- 主页面 -->
         <activity android:name=".activity.IndexActivity" />
@@ -89,6 +88,7 @@
             android:name=".receiver.JPushReceiver"
             android:enabled="true">
             <intent-filter>
+
                 <!-- Required 用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required 用户接收SDK消息的intent -->
@@ -99,6 +99,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+
                 <category android:name="com.qk" />
             </intent-filter>
         </receiver>
@@ -120,9 +121,11 @@
         <activity
             android:name=".nfc.NFC"
             android:launchMode="singleTop">
+
             <!-- 设置nfc种类 -->
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -143,10 +146,13 @@
         <activity android:name=".activity.sys.ForgetPasswordActivity" />
         <activity android:name=".activity.ListGridActivity" />
         <activity android:name=".girdview.NextActivity" />
-        <activity android:name=".activity.sys.AboutUsActivity">
-        </activity>
-        <activity android:name=".activity.CashActivity">
-
+        <activity android:name=".activity.sys.AboutUsActivity"></activity>
+        <activity android:name=".activity.CashActivity"></activity>
+        <activity android:name=".activity.PdfActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
