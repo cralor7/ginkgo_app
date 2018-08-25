@@ -1,10 +1,8 @@
 package com.qk.activity.sys;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.qk.BaseActivity;
 import com.qk.R;
